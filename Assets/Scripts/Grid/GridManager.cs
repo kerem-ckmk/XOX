@@ -16,6 +16,6 @@ public class GridManager : MonoBehaviour
     public void Rebuild(int gridSize)
     {
         GridSize = gridSize;
-        Debug.Log("GridSize:" + GridSize);
+        //Debug.Log("GridSize:" + GridSize);
     }
 }
