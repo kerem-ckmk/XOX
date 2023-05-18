@@ -12,7 +12,6 @@ public class UIManager : MonoBehaviour
     public TMP_InputField sizeInputField;
     public GameplayController gameplayController;
 
-
     private void Awake()
     {
         rebuildButton.onClick.AddListener(() => gameplayController.GridRebuild(sizeInputField.text));

@@ -10,7 +10,7 @@ public class GridController : MonoBehaviour
     public float maxWidth;
 
     public CellController cellControllerPrefab;
-    public List<CellController> cellControllers;
+    public List<CellController> CellControllers { get; private set; }
     public int GridSize { get; private set; }
     public bool IsInitialized { get; private set; }
     
@@ -19,8 +19,8 @@ public class GridController : MonoBehaviour
     private float _cellSize;
     public void Initialize(int defaultGridSize)
     {
-        cellControllers = new List<CellController>();
-        cellControllers.Clear();
+        CellControllers = new List<CellController>();
+        CellControllers.Clear();
         GridSize = defaultGridSize;
         Rebuild(GridSize);
         IsInitialized = true;
@@ -30,7 +30,7 @@ public class GridController : MonoBehaviour
         GridSize = gridSize;
         int cellCount = GridSize * GridSize;
 
-        foreach (var cell in cellControllers)
+        foreach (var cell in CellControllers)
             cell.gameObject.SetActive(false);
 
         for (int i = 0; i < cellCount; i++)
@@ -41,7 +41,7 @@ public class GridController : MonoBehaviour
     {
         CellController cellControllerObject = null;
 
-        foreach (var cellController in cellControllers)
+        foreach (var cellController in CellControllers)
             if (!cellController.gameObject.activeSelf)
                 cellControllerObject = cellController;
 
@@ -60,7 +60,7 @@ public class GridController : MonoBehaviour
     public CellController CreateCellController()
     {
         var cellControllerObject = Instantiate(cellControllerPrefab, transform);
-        cellControllers.Add(cellControllerObject);
+        CellControllers.Add(cellControllerObject);
         return cellControllerObject;
     }
 
