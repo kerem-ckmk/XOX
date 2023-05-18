@@ -12,7 +12,7 @@ public class GameplayController : MonoBehaviour
     [Header("Sound")]
     public AudioClip buttonClip;
     [Header("Managers")]
-    public GridManager gridManager;
+    public GridController gridManager;
     public XManager x_Manager;
 
     public int MatchScore { get; private set; }
