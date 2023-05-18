@@ -799,6 +799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b91699c9ba4aa34bbfad15ad4c86f3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultGridSize: 3
   maxGridSize: 8
   buttonClip: {fileID: 8300000, guid: b6ee779323382ec46808dbc900b6aaed, type: 3}
 --- !u!1 &401713014

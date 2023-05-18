@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameplayController : MonoBehaviour
 {
     [Header("References")]
+    public int defaultGridSize = 3;
     public int maxGridSize = 8;
     [Header("Sound")]
     public AudioClip buttonClip;
@@ -18,16 +19,21 @@ public class GameplayController : MonoBehaviour
 
     public void Initialize()
     {
-        AudioSource = this.gameObject.AddComponent<AudioSource>();
-        AudioSource.playOnAwake = false;
-        AudioSource.clip = buttonClip;
-
+        SetAudioSource();
         IsInitialized = true;
     }
 
     public void GridRebuild()
     {
 
+    }
+
+    private void SetAudioSource()
+    {
+        AudioSource = this.gameObject.AddComponent<AudioSource>();
+        AudioSource.playOnAwake = false;
+        AudioSource.clip = buttonClip;
+        AudioSource.volume = 0.4f;
     }
 
     public void PlaySound()
