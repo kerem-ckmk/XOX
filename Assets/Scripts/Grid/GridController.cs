@@ -64,7 +64,6 @@ public class GridController : MonoBehaviour
         return cellControllerObject;
     }
 
-
     private Vector3 CalculatePosition(Vector2 gridInfo)
     {
         Vector3 cellPosition;
@@ -85,6 +84,7 @@ public class GridController : MonoBehaviour
         return new Vector2(x, y);
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.white;
@@ -92,10 +92,11 @@ public class GridController : MonoBehaviour
         for (int i = 0; i < GridSize * GridSize; i++)
         {
             Vector2 gridInfo = CalculateGrid(i);
-            Gizmos.DrawCube(CalculatePosition(gridInfo), _cellSize * Vector2.one);
+            Vector3 localPosition = transform.TransformPoint(CalculatePosition(gridInfo));
+            Gizmos.DrawCube(localPosition, _cellSize * Vector3.one);
         }
     }
-
+#endif
 }
 
 

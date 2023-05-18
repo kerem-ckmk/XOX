@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CellController : MonoBehaviour
 {
-
     public bool IsInitialized { get; private set; }
     public Vector2 CellInfo { get; private set; }
 
