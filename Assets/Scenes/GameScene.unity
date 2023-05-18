@@ -802,6 +802,8 @@ MonoBehaviour:
   defaultGridSize: 3
   maxGridSize: 8
   buttonClip: {fileID: 8300000, guid: b6ee779323382ec46808dbc900b6aaed, type: 3}
+  gridManager: {fileID: 2000643682}
+  x_Manager: {fileID: 668874810}
 --- !u!1 &401713014
 GameObject:
   m_ObjectHideFlags: 0

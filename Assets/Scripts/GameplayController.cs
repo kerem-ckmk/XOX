@@ -10,6 +10,9 @@ public class GameplayController : MonoBehaviour
     public int maxGridSize = 8;
     [Header("Sound")]
     public AudioClip buttonClip;
+    [Header ("Managers")]
+    public GridManager gridManager;
+    public XManager x_Manager;
 
     public int MatchScore { get; private set; }
     public bool IsInitialized { get; private set; }
@@ -20,6 +23,8 @@ public class GameplayController : MonoBehaviour
     public void Initialize()
     {
         SetAudioSource();
+        gridManager.Initialize(defaultGridSize);
+        x_Manager.Initialize();
         IsInitialized = true;
     }
 

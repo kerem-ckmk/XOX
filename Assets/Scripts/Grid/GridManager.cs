@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int GridSize { get; private set; }
+    public bool IsInitialized { get; private set; }
 
-    // Update is called once per frame
-    void Update()
+    public void Initialize(int defaultGridSize)
     {
-        
+        GridSize = defaultGridSize;
+
+        IsInitialized = true;
     }
 }

@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class XController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public bool IsInitialized { get; private set; }
 
-    // Update is called once per frame
-    void Update()
+    public void Initialize()
     {
-        
+        IsInitialized = true;
     }
 }
