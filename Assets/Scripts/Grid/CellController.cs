@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class CellController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public bool IsInitialized { get; private set; }
+    public Vector2 CellInfo { get; private set; }
+
+    public void Initialize(Vector2 cellInfo)
     {
-        
+        CellInfo = cellInfo;
+        IsInitialized = true;
     }
+    
 }
