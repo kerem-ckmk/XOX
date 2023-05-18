@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1277798729442679754}
   - component: {fileID: 1277798729442679755}
   m_Layer: 0
-  m_Name: SquareVisual
+  m_Name: GridVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,8 +93,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1277798729940526479}
+  - component: {fileID: 3580887257204599890}
   m_Layer: 0
-  m_Name: SquareController
+  m_Name: GridController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,3 +117,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3580887257204599890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277798729940526480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e85338ab4a795094e8d136f3ddffc2fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
