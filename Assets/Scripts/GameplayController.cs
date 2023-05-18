@@ -1,18 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameplayController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("References")]
+    public int maxGridSize = 8;
+    public int MatchScore { get; private set; }
+    public bool IsInitialized { get; private set; }
+    public event Action<int> OnMatchScoreUpdate;
+
+    public void Initialize()
     {
-        
+        IsInitialized = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GridRebuild()
     {
-        
+
     }
 }

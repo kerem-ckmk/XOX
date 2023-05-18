@@ -797,6 +797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b91699c9ba4aa34bbfad15ad4c86f3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxGridSize: 8
 --- !u!1 &401713014
 GameObject:
   m_ObjectHideFlags: 0
@@ -1456,6 +1457,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f6b50aa044073418a79797fd75e86e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  matchScoreTMP: {fileID: 82963295}
+  rebuildButton: {fileID: 180286797}
+  sizeInputField: {fileID: 450534082}
+  gameplayController: {fileID: 382426186}
 --- !u!1 &1959427443
 GameObject:
   m_ObjectHideFlags: 0

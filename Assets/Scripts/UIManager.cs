@@ -1,18 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("References")]
+    public TextMeshProUGUI matchScoreTMP;
+    public Button rebuildButton;
+    public TMP_InputField sizeInputField;
+    public GameplayController gameplayController;
+
+    private void Awake()
     {
-        
+        rebuildButton.onClick.AddListener(gameplayController.GridRebuild);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        gameplayController.Initialize();
     }
 }
