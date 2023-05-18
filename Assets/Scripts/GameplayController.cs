@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameplayController : MonoBehaviour
@@ -10,7 +11,7 @@ public class GameplayController : MonoBehaviour
     public int maxGridSize = 8;
     [Header("Sound")]
     public AudioClip buttonClip;
-    [Header ("Managers")]
+    [Header("Managers")]
     public GridManager gridManager;
     public XManager x_Manager;
 
@@ -19,6 +20,9 @@ public class GameplayController : MonoBehaviour
     public AudioSource AudioSource { get; private set; }
 
     public event Action<int> OnMatchScoreUpdate;
+    public event Action<int> OnChangedInputText;
+
+    private int _minGridSize = 3;
 
     public void Initialize()
     {
@@ -28,9 +32,12 @@ public class GameplayController : MonoBehaviour
         IsInitialized = true;
     }
 
-    public void GridRebuild()
+    public void GridRebuild(string gridSizeStr)
     {
-
+        int gridSize = string.IsNullOrEmpty(gridSizeStr) ? defaultGridSize : int.Parse(gridSizeStr);
+        gridSize = Mathf.Clamp(gridSize, _minGridSize, maxGridSize);
+        OnChangedInputText?.Invoke(gridSize);
+        gridManager.Rebuild(gridSize);
     }
 
     private void SetAudioSource()

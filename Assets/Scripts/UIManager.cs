@@ -12,13 +12,20 @@ public class UIManager : MonoBehaviour
     public TMP_InputField sizeInputField;
     public GameplayController gameplayController;
 
+
     private void Awake()
     {
-        rebuildButton.onClick.AddListener(gameplayController.GridRebuild);
+        rebuildButton.onClick.AddListener(() => gameplayController.GridRebuild(sizeInputField.text));
     }
 
     private void Start()
     {
         gameplayController.Initialize();
+        gameplayController.OnChangedInputText += GameplayController_OnChangedInputText;
+    }
+
+    private void GameplayController_OnChangedInputText(int gridSize)
+    {
+        sizeInputField.text= gridSize.ToString();
     }
 }
