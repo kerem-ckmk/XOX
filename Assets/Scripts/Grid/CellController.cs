@@ -23,7 +23,8 @@ public class CellController : MonoBehaviour
     {
         if (OnHaveItem)
         {
-            OnDestroyItem?.Invoke(CellInfo,transform); 
+            OnDestroyItem?.Invoke(CellInfo,transform);
+            OnHaveItem = false;
             return;
         }
 

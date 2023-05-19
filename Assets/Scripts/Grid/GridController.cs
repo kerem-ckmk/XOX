@@ -30,11 +30,8 @@ public class GridController : MonoBehaviour
         int cellCount = GridSize * GridSize;
 
         foreach (var cell in CellControllers)
-        {
             cell.gameObject.SetActive(false);
-        }
-
-
+       
         for (int i = 0; i < cellCount; i++)
             SpawnCellController(i);
     }

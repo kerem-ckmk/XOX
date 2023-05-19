@@ -26,8 +26,8 @@ public class XManager : MonoBehaviour
             xControllerObject = CreateXController();
 
         _xID += 1;
-        xControllerObject.Initialize(_xID,xTransform);
-
+        xControllerObject.Initialize(_xID, xTransform, xInfo);
+        xControllerObject.gameObject.SetActive(true);
         return xControllerObject;
     }
 
@@ -39,7 +39,9 @@ public class XManager : MonoBehaviour
 
     public void DestroyXController(Vector2 xInfo, Transform xTransform)
     {
-
+        foreach (var xController in xControllers)
+            if (xController.gameObject.activeSelf && xController.Info == xInfo)
+                xController.gameObject.SetActive(false);
     }
     public XController CreateXController()
     {
