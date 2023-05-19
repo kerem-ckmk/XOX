@@ -15,6 +15,7 @@ public class CellController : MonoBehaviour
         CellInfo = cellInfo;
         cellVisual.OnClickCell += CellVisual_OnClickCell;
     }
+
     private void CellVisual_OnClickCell()
     {
         if (OnHaveItem)

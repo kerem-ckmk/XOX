@@ -11,13 +11,13 @@ public class XManager : MonoBehaviour
     public event Action MissionCompleted;
     public event Action<Vector2> OnClosedX;
 
-
     public void Initialize()
     {
         XControllers = new List<XController>();
         XControllers.Clear();
         NeighborGroupList = new List<XController>();
         NeighborGroupList.Clear();
+
         IsInitialized = true;
     }
 
@@ -105,9 +105,7 @@ public class XManager : MonoBehaviour
                                           Mathf.Abs(xController.Info.y - otherController.Info.y) == 1;
 
                 if (isHorizontalNeighbor || isVerticalNeighbor)
-                {
                     xController.AddNeighbor(otherController);
-                }
             }
         }
 
@@ -118,6 +116,5 @@ public class XManager : MonoBehaviour
                 xController.CloseNeighborsRecursive();
                 break;
             }
-        
     }
 }

@@ -24,6 +24,7 @@ public class GridController : MonoBehaviour
         Rebuild(GridSize);
         IsInitialized = true;
     }
+
     public void Rebuild(int gridSize)
     {
         GridSize = gridSize;
@@ -46,8 +47,11 @@ public class GridController : MonoBehaviour
 
         foreach (var cellController in CellControllers)
             if (!cellController.gameObject.activeSelf)
+            {
                 cellControllerObject = cellController;
-
+                break;
+            }
+               
         if (cellControllerObject == null)
             cellControllerObject = CreateCellController();
 

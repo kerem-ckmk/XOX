@@ -22,6 +22,7 @@ public class XController : MonoBehaviour
         transform.localScale = xTransform.localScale;
         IsInitialized = true;
     }
+
     public void AddNeighbor(XController neighborController)
     {
         if (neighborController == null || Neighbors.Contains(neighborController))
