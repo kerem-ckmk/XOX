@@ -18,9 +18,8 @@ public class XController : MonoBehaviour
         Neighbors.Clear();
 
         Info = xInfo;
-        transform.SetParent(xTransform);
-        transform.localPosition = Vector2.zero;
-        transform.localScale = Vector3.one;
+        transform.position = xTransform.position;
+        transform.localScale = xTransform.localScale;
         IsInitialized = true;
     }
     public void AddNeighbor(XController neighborController)
