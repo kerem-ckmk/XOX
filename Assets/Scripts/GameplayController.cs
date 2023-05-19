@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameplayController : MonoBehaviour
@@ -12,7 +9,7 @@ public class GameplayController : MonoBehaviour
     [Header("Sound")]
     public AudioClip buttonClip;
     [Header("Managers")]
-    public GridController gridManager;
+    public GridController gridController;
     public XManager x_Manager;
 
     public int MatchScore { get; private set; }
@@ -27,30 +24,30 @@ public class GameplayController : MonoBehaviour
     public void Initialize()
     {
         SetAudioSource();
-        gridManager.Initialize(defaultGridSize);
+        gridController.Initialize(defaultGridSize);
+        gridController.OnCreateItem += GridController_OnCreateItem;
+        gridController.OnDestroyItem += GridController_OnDestroyItem;
         x_Manager.Initialize();
         IsInitialized = true;
     }
 
-    private void Update()
+    private void GridController_OnDestroyItem(Vector2 cellInfo, Transform cellTransform)
     {
-        if (!IsInitialized)
-            return;
-
-        if (Input.GetMouseButtonDown(0))
-        {
-
-        }
+        x_Manager.DestroyXController(cellInfo,cellTransform);
     }
 
-
+    private void GridController_OnCreateItem(Vector2 cellInfo, Transform cellTransform)
+    {
+        x_Manager.SpawnXController(cellInfo,cellTransform);
+    }
 
     public void GridRebuild(string gridSizeStr)
     {
         int gridSize = string.IsNullOrEmpty(gridSizeStr) ? defaultGridSize : int.Parse(gridSizeStr);
         gridSize = Mathf.Clamp(gridSize, _minGridSize, maxGridSize);
         OnChangedInputText?.Invoke(gridSize);
-        gridManager.Rebuild(gridSize);
+        x_Manager.Rebuild();
+        gridController.Rebuild(gridSize);
     }
 
     private void SetAudioSource()

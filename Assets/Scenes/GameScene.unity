@@ -802,7 +802,7 @@ MonoBehaviour:
   defaultGridSize: 3
   maxGridSize: 8
   buttonClip: {fileID: 8300000, guid: b6ee779323382ec46808dbc900b6aaed, type: 3}
-  gridManager: {fileID: 2000643682}
+  gridController: {fileID: 2000643682}
   x_Manager: {fileID: 668874810}
 --- !u!1 &401713014
 GameObject:
@@ -1264,6 +1264,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3115d3c195034194a91019bfc3ebc690, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xControllerPrefab: {fileID: -1860250918828416935, guid: 6cee44a58d62d5b49b54ccfd074c7e56, type: 3}
+  xControllers: []
 --- !u!1 &697243905
 GameObject:
   m_ObjectHideFlags: 0

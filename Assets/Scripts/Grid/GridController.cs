@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class GridController : MonoBehaviour
@@ -14,9 +12,9 @@ public class GridController : MonoBehaviour
     public List<CellController> CellControllers { get; private set; }
     public int GridSize { get; private set; }
     public bool IsInitialized { get; private set; }
-    
 
-
+    public event Action<Vector2, Transform> OnCreateItem;
+    public event Action<Vector2, Transform> OnDestroyItem;
     private float _cellSize;
     public void Initialize(int defaultGridSize)
     {
@@ -32,7 +30,10 @@ public class GridController : MonoBehaviour
         int cellCount = GridSize * GridSize;
 
         foreach (var cell in CellControllers)
+        {
             cell.gameObject.SetActive(false);
+        }
+
 
         for (int i = 0; i < cellCount; i++)
             SpawnCellController(i);
@@ -53,9 +54,21 @@ public class GridController : MonoBehaviour
         cellControllerObject.transform.localPosition = CalculatePosition(cellInfo);
         cellControllerObject.transform.localScale = _cellSize * Vector3.one;
         cellControllerObject.Initialize(cellInfo);
+        cellControllerObject.OnCreateItem += CellControllerObject_OnCreateItem;
+        cellControllerObject.OnDestroyItem += CellControllerObject_OnDestroyItem;
         cellControllerObject.gameObject.SetActive(true);
 
         return cellControllerObject;
+    }
+
+    private void CellControllerObject_OnDestroyItem(Vector2 cellInfo, Transform cellTransform)
+    {
+        OnDestroyItem?.Invoke(cellInfo, cellTransform);
+    }
+
+    private void CellControllerObject_OnCreateItem(Vector2 cellInfo, Transform cellTransform)
+    {
+        OnCreateItem?.Invoke(cellInfo, cellTransform);
     }
 
     public CellController CreateCellController()
