@@ -1058,7 +1058,7 @@ MonoBehaviour:
   m_CharacterValidation: 2
   m_RegexValue: 
   m_GlobalPointSize: 14
-  m_CharacterLimit: 0
+  m_CharacterLimit: 1
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []
@@ -1556,4 +1556,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxWidth: 4.25
+  cellSpacing: 0
   cellControllerPrefab: {fileID: 3580887257204599890, guid: f83a9d33837216e4bbeb53b95bf06483, type: 3}

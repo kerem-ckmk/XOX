@@ -32,6 +32,19 @@ public class GameplayController : MonoBehaviour
         IsInitialized = true;
     }
 
+    private void Update()
+    {
+        if (!IsInitialized)
+            return;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+
+        }
+    }
+
+
+
     public void GridRebuild(string gridSizeStr)
     {
         int gridSize = string.IsNullOrEmpty(gridSizeStr) ? defaultGridSize : int.Parse(gridSizeStr);

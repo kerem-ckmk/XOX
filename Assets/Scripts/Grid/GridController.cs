@@ -8,6 +8,7 @@ public class GridController : MonoBehaviour
 {
     [Header("References")]
     public float maxWidth;
+    public float cellSpacing;
 
     public CellController cellControllerPrefab;
     public List<CellController> CellControllers { get; private set; }
@@ -15,7 +16,7 @@ public class GridController : MonoBehaviour
     public bool IsInitialized { get; private set; }
     
 
-    private float _cellSpacing = 0f;
+
     private float _cellSize;
     public void Initialize(int defaultGridSize)
     {
@@ -67,12 +68,12 @@ public class GridController : MonoBehaviour
     private Vector3 CalculatePosition(Vector2 gridInfo)
     {
         Vector3 cellPosition;
-        _cellSize = (maxWidth - (_cellSpacing * (GridSize - 1))) / GridSize;
-        Vector3 startPos = transform.localPosition - new Vector3((_cellSize + _cellSpacing) * (GridSize - 1) * 0.5f, (_cellSize + _cellSpacing) * (GridSize - 1) * 0.5f, 0f);
+        _cellSize = (maxWidth - (cellSpacing * (GridSize - 1))) / GridSize;
+        Vector3 startPos = transform.localPosition - new Vector3((_cellSize + cellSpacing) * (GridSize - 1) * 0.5f, (_cellSize + cellSpacing) * (GridSize - 1) * 0.5f, 0f);
 
         int x = (int)gridInfo.x;
         int y = (int)gridInfo.y;
-        cellPosition = startPos + new Vector3(x * (_cellSize + _cellSpacing), y * (_cellSize + _cellSpacing), 0f);
+        cellPosition = startPos + new Vector3(x * (_cellSize + cellSpacing), y * (_cellSize + cellSpacing), 0f);
 
         return cellPosition;
     }
