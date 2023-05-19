@@ -35,7 +35,7 @@ public class GridController : MonoBehaviour
             cell.OnDestroyItem -= CellControllerObject_OnDestroyItem;
             cell.Deactive();
         }
-   
+
         for (int i = 0; i < cellCount; i++)
             SpawnCellController(i);
     }

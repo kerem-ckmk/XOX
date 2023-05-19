@@ -66,6 +66,7 @@ public class GameplayController : MonoBehaviour
         OnChangedInputText?.Invoke(gridSize);
         x_Manager.Rebuild();
         gridController.Rebuild(gridSize);
+        PlaySound();
     }
 
     private void SetAudioSource()
