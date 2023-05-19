@@ -30,8 +30,12 @@ public class GridController : MonoBehaviour
         int cellCount = GridSize * GridSize;
 
         foreach (var cell in CellControllers)
-            cell.gameObject.SetActive(false);
-       
+        {
+            cell.OnCreateItem -= CellControllerObject_OnCreateItem;
+            cell.OnDestroyItem -= CellControllerObject_OnDestroyItem;
+            cell.Deactive();
+        }
+   
         for (int i = 0; i < cellCount; i++)
             SpawnCellController(i);
     }
@@ -58,13 +62,17 @@ public class GridController : MonoBehaviour
         return cellControllerObject;
     }
 
-    private void CellControllerObject_OnDestroyItem(Vector2 cellInfo, Transform cellTransform)
+    private void CellControllerObject_OnDestroyItem(CellController cellController)
     {
+        Vector2 cellInfo = cellController.CellInfo;
+        Transform cellTransform = cellController.transform;
         OnDestroyItem?.Invoke(cellInfo, cellTransform);
     }
 
-    private void CellControllerObject_OnCreateItem(Vector2 cellInfo, Transform cellTransform)
+    private void CellControllerObject_OnCreateItem(CellController cellController)
     {
+        Vector2 cellInfo = cellController.CellInfo;
+        Transform cellTransform = cellController.transform;
         OnCreateItem?.Invoke(cellInfo, cellTransform);
     }
 
@@ -73,6 +81,16 @@ public class GridController : MonoBehaviour
         var cellControllerObject = Instantiate(cellControllerPrefab, transform);
         CellControllers.Add(cellControllerObject);
         return cellControllerObject;
+    }
+
+    public void ClearCellController(Vector2 itemInfo)
+    {
+        foreach (var cell in CellControllers)
+            if (itemInfo == cell.CellInfo)
+            {
+                cell.SetHaveItem(false);
+                break;
+            }
     }
 
     private Vector3 CalculatePosition(Vector2 gridInfo)

@@ -1,35 +1,43 @@
 using System;
 using UnityEngine;
-using static Unity.Burst.Intrinsics.X86;
 
 public class CellController : MonoBehaviour
 {
     public CellVisual cellVisual;
-    public bool IsInitialized { get; private set; }
     public Vector2 CellInfo { get; private set; }
     public bool OnHaveItem { get; private set; }
 
-    public event Action<Vector2,Transform> OnCreateItem;
-    public event Action<Vector2, Transform> OnDestroyItem;
+    public event Action<CellController> OnCreateItem;
+    public event Action<CellController> OnDestroyItem;
 
     public void Initialize(Vector2 cellInfo)
     {
-        OnHaveItem = false;
         CellInfo = cellInfo;
         cellVisual.OnClickCell += CellVisual_OnClickCell;
-        IsInitialized = true;
     }
     private void CellVisual_OnClickCell()
     {
         if (OnHaveItem)
         {
-            OnDestroyItem?.Invoke(CellInfo,transform);
+            OnDestroyItem?.Invoke(this);
             OnHaveItem = false;
             return;
         }
 
         OnHaveItem = true;
-        OnCreateItem?.Invoke(CellInfo,transform);
+        OnCreateItem?.Invoke(this);
+    }
+
+    public void Deactive()
+    {
+        OnHaveItem = false;
+        cellVisual.OnClickCell -= CellVisual_OnClickCell;
+        gameObject.SetActive(false);
+    }
+
+    public void SetHaveItem(bool haveItem)
+    {
+        OnHaveItem = haveItem;
     }
 
     private void OnDestroy()

@@ -12,11 +12,11 @@ public class GameplayController : MonoBehaviour
     public GridController gridController;
     public XManager x_Manager;
 
-    public int MatchScore { get; private set; }
+    public int Score { get; private set; }
     public bool IsInitialized { get; private set; }
     public AudioSource AudioSource { get; private set; }
 
-    public event Action<int> OnMatchScoreUpdate;
+    public event Action<int> OnScoreUpdate;
     public event Action<int> OnChangedInputText;
 
     private int _minGridSize = 3;
@@ -24,21 +24,39 @@ public class GameplayController : MonoBehaviour
     public void Initialize()
     {
         SetAudioSource();
+
         gridController.Initialize(defaultGridSize);
         gridController.OnCreateItem += GridController_OnCreateItem;
         gridController.OnDestroyItem += GridController_OnDestroyItem;
+
         x_Manager.Initialize();
+        x_Manager.MissionCompleted += X_Manager_MissionCompleted;
+        x_Manager.OnClosedX += X_Manager_OnClosedX;
+
         IsInitialized = true;
+    }
+
+    private void X_Manager_OnClosedX(Vector2 xInfo)
+    {
+        gridController.ClearCellController(xInfo);
+    }
+
+    private void X_Manager_MissionCompleted()
+    {
+        Score += 1;
+        OnScoreUpdate?.Invoke(Score);
     }
 
     private void GridController_OnDestroyItem(Vector2 cellInfo, Transform cellTransform)
     {
         x_Manager.DestroyXController(cellInfo,cellTransform);
+        PlaySound();
     }
 
     private void GridController_OnCreateItem(Vector2 cellInfo, Transform cellTransform)
     {
         x_Manager.SpawnXController(cellInfo,cellTransform);
+        PlaySound();
     }
 
     public void GridRebuild(string gridSizeStr)

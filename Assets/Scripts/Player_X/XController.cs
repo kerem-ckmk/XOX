@@ -1,18 +1,53 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class XController : MonoBehaviour
 {
-    public int ID { get; private set; } = -1;
     public Vector2 Info { get; private set; }
     public bool IsInitialized { get; private set; }
+    public List<XController> Neighbors { get; private set; }
 
-    public void Initialize(int id, Transform xTransform, Vector2 xInfo)
+    public event Action<XController> OnClose;
+
+    public void Initialize(Transform xTransform, Vector2 xInfo)
     {
-        ID = id;
+        if (Neighbors == null)
+            Neighbors = new List<XController>();
+
+        Neighbors.Clear();
+
         Info = xInfo;
         transform.SetParent(xTransform);
         transform.localPosition = Vector2.zero;
         transform.localScale = Vector3.one;
         IsInitialized = true;
+    }
+    public void AddNeighbor(XController neighborController)
+    {
+        if (neighborController == null || Neighbors.Contains(neighborController))
+            return;
+
+        Neighbors.Add(neighborController);
+    }
+
+    public void CloseNeighborsRecursive()
+    {
+        OnClose?.Invoke(this);
+        gameObject.SetActive(false);
+
+        foreach (var neighbor in Neighbors)
+        {
+            if (neighbor.gameObject.activeSelf)
+            {
+                neighbor.CloseNeighborsRecursive();
+            }
+        }
+
+    }
+
+    public void ClearNeighbors()
+    {
+        Neighbors.Clear();
     }
 }
